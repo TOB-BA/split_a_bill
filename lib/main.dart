@@ -1,8 +1,12 @@
 import 'package:first_flutter_project/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -11,15 +15,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    debugPaintSizeEnabled = true;
+
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff0d39d8)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Wesplit'),
+      home: const MyHomePage(title: 'We Split'),
     );
   }
 }
-

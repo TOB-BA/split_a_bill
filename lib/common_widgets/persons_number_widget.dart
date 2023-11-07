@@ -17,7 +17,7 @@ class PersonsNumberWidget extends StatelessWidget {
       children: [
         Container(
           decoration: const BoxDecoration(
-              color: Color(0xff0932c2),
+              color: Colors.grey,
               borderRadius: BorderRadius.all(Radius.circular(50))),
           child: SizedBox(
             height: 60,

@@ -19,21 +19,19 @@ class _SplitPageState extends State<SplitPage> {
   List<User> users = [];
   String totalBill = "";
   int touchedIndex = -1;
-  TextEditingController editingController = TextEditingController();
-  String initialText = "";
+  double leftToPay = 0.0;
 
   @override
   void initState() {
     super.initState();
     totalBill = widget.price;
-    editingController = TextEditingController(text: initialText);
-
+    leftToPay = double.parse(widget.price);
     for (int i = 0; i < widget.numberOfPersons; i++) {
       users.add(User(
         id: i,
         name: "User ${i + 1}",
-        priceToPay: double.parse(widget.price) / widget.numberOfPersons,
-        sliderValue: 100 / widget.numberOfPersons,
+        priceToPay: 0,
+        sliderValue: 0.0,
         maxSliderValue: 100,
         color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
             .withOpacity(1.0),
@@ -42,46 +40,38 @@ class _SplitPageState extends State<SplitPage> {
     }
   }
 
-  @override
-  void dispose() {
-    editingController.dispose();
-    super.dispose();
-  }
-
   User findUserById(int id) {
     return users.firstWhere((user) => user.id == id);
   }
 
-  void setInputFieldState(User user, String newValue) {
+  void calculateLeftToPay(List<User> users) {
     setState(() {
-      findUserById(user.id).name = newValue;
-      user.isNameInEditMode = false;
-    });
-  }
+      var calculatedPrice = 0.0;
+      for (var user in users) {
+        calculatedPrice = calculatedPrice + user.priceToPay;
+      }
 
-  void setEditingStateOnTrue(User user) {
-    setState(() {
-      user.isNameInEditMode = true;
-      initialText = user.name;
+      leftToPay = double.parse(
+          (double.parse(widget.price) - calculatedPrice).toStringAsFixed(2));
     });
   }
 
   void onDragEnd(double sliderValue, int id) {
     setState(() {
       var userOnWhichSliderIsChanged = findUserById(id);
+      calculateLeftToPay(users);
 
-      userOnWhichSliderIsChanged.sliderValue = sliderValue;
-      double priceConvertedToDouble = double.parse(widget.price);
-      userOnWhichSliderIsChanged.priceToPay = double.parse(
-          (priceConvertedToDouble * (sliderValue / 100)).toStringAsFixed(2));
-
+      double allPercentages = 0;
       var restOfUsers = users.where((user) => user.id != id);
       for (var user in restOfUsers) {
-        user.sliderValue =
-            (100 - findUserById(id).sliderValue) / (restOfUsers.length);
-        user.priceToPay = double.parse(
-            (priceConvertedToDouble * (user.sliderValue / 100))
-                .toStringAsFixed(2));
+        allPercentages = allPercentages + user.sliderValue;
+      }
+
+      if (allPercentages + sliderValue <= 100) {
+        userOnWhichSliderIsChanged.sliderValue = sliderValue;
+        double priceConvertedToDouble = double.parse(widget.price);
+        userOnWhichSliderIsChanged.priceToPay = double.parse(
+            (priceConvertedToDouble * (sliderValue / 100)).toStringAsFixed(2));
       }
     });
   }
@@ -90,23 +80,24 @@ class _SplitPageState extends State<SplitPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey,
         centerTitle: true,
-        iconTheme: const IconThemeData(color: Color(0xff3675e8), size: 40),
+        iconTheme: const IconThemeData(color: Colors.white, size: 40),
         title: const Text(
           "Split the bill",
           textAlign: TextAlign.center,
-          style: TextStyle(color: Color(0xff3675e8)),
+          style: TextStyle(color: Colors.white),
         ),
       ),
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        color: const Color(0xff0d39d8),
+        color: Colors.white,
         child: SafeArea(
           child: Column(
             children: [
-              SplitPageHeader(users: users, totalBill: totalBill),
+              SplitPageHeader(
+                  users: users, totalBill: totalBill, leftToPay: leftToPay),
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.all(8),
@@ -116,9 +107,6 @@ class _SplitPageState extends State<SplitPage> {
                     return CustomCard(
                       user: user,
                       onDragEnd: onDragEnd,
-                      setInputFieldState: setInputFieldState,
-                      editingController: editingController,
-                      setEditingStateOnTrue: setEditingStateOnTrue,
                     );
                   },
                 ),

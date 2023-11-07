@@ -1,21 +1,43 @@
 import 'package:first_flutter_project/models/user.dart';
 import 'package:flutter/material.dart';
 
-class CustomCard extends StatelessWidget {
+class CustomCard extends StatefulWidget {
   final Function(double, int) onDragEnd;
   final User user;
-  final Function setInputFieldState;
-  final TextEditingController editingController;
-  final Function setEditingStateOnTrue;
 
   const CustomCard({
     super.key,
     required this.user,
     required this.onDragEnd,
-    required this.setInputFieldState,
-    required this.editingController,
-    required this.setEditingStateOnTrue,
   });
+
+  @override
+  State<CustomCard> createState() => _CustomCardState();
+}
+
+class _CustomCardState extends State<CustomCard> {
+  TextEditingController editingController = TextEditingController();
+  void setEditingStateOnTrue(User user) {
+    setState(() {
+      editingController.text = user.name;
+      user.isNameInEditMode = true;
+    });
+  }
+
+  void setInputFieldState(User user) {
+    setState(() {
+      if (editingController.text.isNotEmpty) {
+        user.name = editingController.text;
+        user.isNameInEditMode = false;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    editingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +56,14 @@ class CustomCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(
-                        Icons.person,
-                        size: 50,
-                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          _editTitleTextField(user),
+                          _editTitleTextField(widget.user),
                           Row(
                             children: [
                               Text(
-                                user.sliderValue.round().toString(),
+                                widget.user.sliderValue.round().toString(),
                               ),
                               const Text("%"),
                             ],
@@ -55,7 +73,7 @@ class CustomCard extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    "€ ${user.priceToPay.toStringAsFixed(2)}",
+                    "€ ${widget.user.priceToPay.toStringAsFixed(2)}",
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -69,13 +87,13 @@ class CustomCard extends StatelessWidget {
                     width: 300,
                     child: Slider(
                       divisions: 100,
-                      value: user.sliderValue,
-                      max: user.maxSliderValue,
+                      value: widget.user.sliderValue,
+                      max: 100,
                       onChanged: (double value) => {
-                        onDragEnd(value, user.id),
+                        widget.onDragEnd(value, widget.user.id),
                       },
-                      activeColor: user.color,
-                      inactiveColor: user.color,
+                      activeColor: widget.user.color,
+                      inactiveColor: widget.user.color,
                     ),
                   )
                 ],
@@ -90,16 +108,23 @@ class CustomCard extends StatelessWidget {
   Widget _editTitleTextField(user) {
     if (user.isNameInEditMode) {
       return Positioned(
-        child: Container(
+        child: SizedBox(
           width: 150,
-          height: 20.0,
+          height: 30,
           child: TextField(
+            onTapOutside: (event) => {
+              setInputFieldState(user),
+            },
             onSubmitted: (newValue) => {
-              setInputFieldState(user, newValue),
+              setInputFieldState(user),
             },
             autofocus: true,
             controller: editingController,
             maxLines: 1,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 18.0,
+            ),
           ),
         ),
       );
@@ -108,13 +133,19 @@ class CustomCard extends StatelessWidget {
       onTap: () => {
         setEditingStateOnTrue(user),
       },
-      child: Text(
-        user.name,
-        style: const TextStyle(
-          color: Colors.black,
-          fontSize: 18.0,
-        ),
-      ),
+      child: Expanded(
+          flex: 1,
+          child: Column(children: [
+            Text(
+              user.name,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 18.0,
+              ),
+            ),
+          ])),
     );
   }
 }

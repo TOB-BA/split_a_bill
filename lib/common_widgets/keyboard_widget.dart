@@ -22,37 +22,61 @@ class KeyboardWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             TextButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    side: const BorderSide(color: Colors.grey),
+                  ),
+                ),
+              ),
               onPressed: () => {
                 addNumber('1'),
               },
               child: const Text(
                 '1',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.grey,
                   fontSize: 30,
                 ),
               ),
             ),
             TextButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    side: const BorderSide(color: Colors.grey),
+                  ),
+                ),
+              ),
               onPressed: () => {
                 addNumber('2'),
               },
               child: const Text(
                 '2',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.grey,
                   fontSize: 30,
                 ),
               ),
             ),
             TextButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    side: const BorderSide(color: Colors.grey),
+                  ),
+                ),
+              ),
               onPressed: () => {
                 addNumber('3'),
               },
               child: const Text(
                 '3',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.grey,
                   fontSize: 30,
                 ),
               ),
@@ -64,37 +88,61 @@ class KeyboardWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             TextButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    side: const BorderSide(color: Colors.grey),
+                  ),
+                ),
+              ),
               onPressed: () => {
                 addNumber('4'),
               },
               child: const Text(
                 '4',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.grey,
                   fontSize: 30,
                 ),
               ),
             ),
             TextButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    side: const BorderSide(color: Colors.grey),
+                  ),
+                ),
+              ),
               onPressed: () => {
                 addNumber('5'),
               },
               child: const Text(
                 '5',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.grey,
                   fontSize: 30,
                 ),
               ),
             ),
             TextButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    side: const BorderSide(color: Colors.grey),
+                  ),
+                ),
+              ),
               onPressed: () => {
                 addNumber('6'),
               },
               child: const Text(
                 '6',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.grey,
                   fontSize: 30,
                 ),
               ),
@@ -106,37 +154,61 @@ class KeyboardWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             TextButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    side: const BorderSide(color: Colors.grey),
+                  ),
+                ),
+              ),
               onPressed: () => {
                 addNumber('7'),
               },
               child: const Text(
                 '7',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.grey,
                   fontSize: 30,
                 ),
               ),
             ),
             TextButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    side: const BorderSide(color: Colors.grey),
+                  ),
+                ),
+              ),
               onPressed: () => {
                 addNumber('8'),
               },
               child: const Text(
                 '8',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.grey,
                   fontSize: 30,
                 ),
               ),
             ),
             TextButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    side: const BorderSide(color: Colors.grey),
+                  ),
+                ),
+              ),
               onPressed: () => {
                 addNumber('9'),
               },
               child: const Text(
                 '9',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.grey,
                   fontSize: 30,
                 ),
               ),
@@ -154,19 +226,27 @@ class KeyboardWidget extends StatelessWidget {
               child: const Text(
                 '.',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.grey,
                   fontSize: 30,
                 ),
               ),
             ),
             TextButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    side: const BorderSide(color: Colors.grey),
+                  ),
+                ),
+              ),
               onPressed: () => {
                 addNumber('0'),
               },
               child: const Text(
                 '0',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.grey,
                   fontSize: 30,
                 ),
               ),
@@ -176,8 +256,8 @@ class KeyboardWidget extends StatelessWidget {
                 clearPrice(),
               },
               child: const Icon(
-                Icons.cancel_outlined,
-                color: Colors.white,
+                Icons.backspace,
+                color: Colors.grey,
               ),
             ),
           ],

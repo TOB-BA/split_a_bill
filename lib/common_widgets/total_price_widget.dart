@@ -10,7 +10,7 @@ class TotalPriceWidget extends StatelessWidget {
       children: [
         const Text(
           'Total (incl. tax & fees)',
-          style: TextStyle(color: Color(0xff5db0f9)),
+          style: TextStyle(color: Colors.grey),
         ),
         Padding(
           padding: const EdgeInsets.only(
@@ -24,7 +24,7 @@ class TotalPriceWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             maxLines: 2,
             style: const TextStyle(
-              color: Colors.white,
+              color: Colors.grey,
               fontSize: 40,
               fontWeight: FontWeight.bold,
             ),
