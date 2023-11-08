@@ -111,21 +111,24 @@ class _SplitPageState extends State<SplitPage> {
                         bottomRight: Radius.circular(40),
                       ),
                     ),
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemCount: users.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        User user = users[index];
-                        return CustomCard(
-                          user: user,
-                          onDragEnd: onDragEnd,
-                        );
-                      },
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 0, top: 0, right: 0, bottom: 40),
+                      child: ListView.builder(
+                        padding: const EdgeInsets.all(8),
+                        itemCount: users.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          User user = users[index];
+                          return CustomCard(
+                            user: user,
+                            onDragEnd: onDragEnd,
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
               Container(
                 color: ColorsLibrary.appGray,
                 child: ElevatedButton(
