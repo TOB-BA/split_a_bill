@@ -1,3 +1,4 @@
+import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:flutter/material.dart';
 
 class PersonsNumberWidget extends StatelessWidget {
@@ -16,9 +17,9 @@ class PersonsNumberWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          decoration: const BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.all(Radius.circular(50))),
+          decoration: BoxDecoration(
+              color: ColorsLibrary.appGray,
+              borderRadius: const BorderRadius.all(Radius.circular(50))),
           child: SizedBox(
             height: 60,
             width: 300,

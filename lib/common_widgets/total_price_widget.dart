@@ -1,3 +1,4 @@
+import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:flutter/material.dart';
 
 class TotalPriceWidget extends StatelessWidget {
@@ -8,9 +9,9 @@ class TotalPriceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text(
+        Text(
           'Total (incl. tax & fees)',
-          style: TextStyle(color: Colors.grey),
+          style: TextStyle(color: ColorsLibrary.appGray),
         ),
         Padding(
           padding: const EdgeInsets.only(
@@ -23,8 +24,8 @@ class TotalPriceWidget extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
             maxLines: 2,
-            style: const TextStyle(
-              color: Colors.grey,
+            style: TextStyle(
+              color: ColorsLibrary.appGray,
               fontSize: 40,
               fontWeight: FontWeight.bold,
             ),

@@ -1,3 +1,4 @@
+import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:first_flutter_project/models/user.dart';
 import 'package:flutter/material.dart';
 
@@ -19,9 +20,9 @@ class SplitPageHeader extends StatelessWidget {
           height: 100,
           width: double.infinity,
           child: DecoratedBox(
-            decoration: const BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: ColorsLibrary.appGray,
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10),
               ),
@@ -36,9 +37,8 @@ class SplitPageHeader extends StatelessWidget {
                     const Text(
                       "Total bill",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 20,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
@@ -51,28 +51,50 @@ class SplitPageHeader extends StatelessWidget {
                     ),
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Left to pay",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red),
-                    ),
-                    Text(
-                      "€ $leftToPay",
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red),
-                    ),
-                  ],
-                ),
+                leftBill(leftToPay),
               ],
             ),
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget leftBill(leftToPay1) {
+    if (leftToPay1 > 0) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            "Left to pay",
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+          Text(
+            "€ $leftToPay1",
+            style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: ColorsLibrary.appRed),
+          ),
+        ],
+      );
+    }
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
+          "Left to pay",
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
+        Text(
+          "€ $leftToPay1",
+          style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: ColorsLibrary.appGreen),
         ),
       ],
     );

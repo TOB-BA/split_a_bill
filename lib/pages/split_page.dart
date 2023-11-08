@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:first_flutter_project/common_widgets/split_page_header_widget.dart';
 import 'package:first_flutter_project/common_widgets/user_card_widget.dart';
+import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:first_flutter_project/models/user.dart';
 import 'package:flutter/material.dart';
 
@@ -80,7 +81,7 @@ class _SplitPageState extends State<SplitPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: ColorsLibrary.appGray,
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white, size: 40),
         title: const Text(

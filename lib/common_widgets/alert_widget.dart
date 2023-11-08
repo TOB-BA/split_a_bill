@@ -1,3 +1,4 @@
+import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:flutter/material.dart';
 
 class Alert extends StatelessWidget {
@@ -15,11 +16,11 @@ class Alert extends StatelessWidget {
             backgroundColor: Colors.white,
             title: Text(
               title,
-              style: const TextStyle(color: Colors.grey, fontSize: 24),
+              style: TextStyle(color: ColorsLibrary.appGray, fontSize: 24),
             ),
             content: Text(
               description,
-              style: const TextStyle(color: Colors.grey, fontSize: 16),
+              style: TextStyle(color: ColorsLibrary.appGray, fontSize: 16),
             ),
             actions: [
               ElevatedButton(
@@ -27,7 +28,7 @@ class Alert extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
+                  primary: ColorsLibrary.appGreen,
                 ),
                 child: const Text(
                   'OK',

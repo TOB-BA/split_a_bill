@@ -1,4 +1,6 @@
 import 'package:first_flutter_project/common_widgets/keyboard_widget.dart';
+import 'package:first_flutter_project/constants/colors/colors_library.dart';
+import 'package:first_flutter_project/constants/common_constants.dart';
 import 'package:first_flutter_project/pages/split_page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +18,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int personsNumber = 0;
-  String price = "0";
+  String price = CommonConstants.initialPrice;
 
   void incrementCounter() {
     setState(() {
@@ -34,9 +36,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void addNumber(String number) {
     setState(() {
-      if (price == "0") {
+      if (price == CommonConstants.initialPrice) {
         if (number == ".") {
-          price = "0.";
+          price = CommonConstants.initialPriceWithDot;
           return;
         }
         price = "";
@@ -67,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void increasePriceDialog() {
     var bill = "";
     if (price == "0.") {
-      bill = "0";
+      bill = CommonConstants.initialPrice;
     } else {
       bill = price;
     }
@@ -106,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(
           widget.title,
           textAlign: TextAlign.center,
-          style: const TextStyle(color: Colors.grey),
+          style: TextStyle(color: ColorsLibrary.appGray),
         ),
       ),
       body: Container(

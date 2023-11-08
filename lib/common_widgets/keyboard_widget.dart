@@ -1,3 +1,4 @@
+import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:flutter/material.dart';
 
 class KeyboardWidget extends StatelessWidget {
@@ -26,17 +27,17 @@ class KeyboardWidget extends StatelessWidget {
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
-                    side: const BorderSide(color: Colors.grey),
+                    side: BorderSide(color: ColorsLibrary.appGray),
                   ),
                 ),
               ),
               onPressed: () => {
                 addNumber('1'),
               },
-              child: const Text(
+              child: Text(
                 '1',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: ColorsLibrary.appGray,
                   fontSize: 30,
                 ),
               ),
@@ -46,17 +47,17 @@ class KeyboardWidget extends StatelessWidget {
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
-                    side: const BorderSide(color: Colors.grey),
+                    side: BorderSide(color: ColorsLibrary.appGray),
                   ),
                 ),
               ),
               onPressed: () => {
                 addNumber('2'),
               },
-              child: const Text(
+              child: Text(
                 '2',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: ColorsLibrary.appGray,
                   fontSize: 30,
                 ),
               ),
@@ -66,17 +67,17 @@ class KeyboardWidget extends StatelessWidget {
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
-                    side: const BorderSide(color: Colors.grey),
+                    side: BorderSide(color: ColorsLibrary.appGray),
                   ),
                 ),
               ),
               onPressed: () => {
                 addNumber('3'),
               },
-              child: const Text(
+              child: Text(
                 '3',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: ColorsLibrary.appGray,
                   fontSize: 30,
                 ),
               ),
@@ -92,17 +93,17 @@ class KeyboardWidget extends StatelessWidget {
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
-                    side: const BorderSide(color: Colors.grey),
+                    side: BorderSide(color: ColorsLibrary.appGray),
                   ),
                 ),
               ),
               onPressed: () => {
                 addNumber('4'),
               },
-              child: const Text(
+              child: Text(
                 '4',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: ColorsLibrary.appGray,
                   fontSize: 30,
                 ),
               ),
@@ -112,17 +113,17 @@ class KeyboardWidget extends StatelessWidget {
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
-                    side: const BorderSide(color: Colors.grey),
+                    side: BorderSide(color: ColorsLibrary.appGray),
                   ),
                 ),
               ),
               onPressed: () => {
                 addNumber('5'),
               },
-              child: const Text(
+              child: Text(
                 '5',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: ColorsLibrary.appGray,
                   fontSize: 30,
                 ),
               ),
@@ -132,17 +133,17 @@ class KeyboardWidget extends StatelessWidget {
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
-                    side: const BorderSide(color: Colors.grey),
+                    side: BorderSide(color: ColorsLibrary.appGray),
                   ),
                 ),
               ),
               onPressed: () => {
                 addNumber('6'),
               },
-              child: const Text(
+              child: Text(
                 '6',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: ColorsLibrary.appGray,
                   fontSize: 30,
                 ),
               ),
@@ -158,17 +159,17 @@ class KeyboardWidget extends StatelessWidget {
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
-                    side: const BorderSide(color: Colors.grey),
+                    side: BorderSide(color: ColorsLibrary.appGray),
                   ),
                 ),
               ),
               onPressed: () => {
                 addNumber('7'),
               },
-              child: const Text(
+              child: Text(
                 '7',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: ColorsLibrary.appGray,
                   fontSize: 30,
                 ),
               ),
@@ -178,17 +179,17 @@ class KeyboardWidget extends StatelessWidget {
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
-                    side: const BorderSide(color: Colors.grey),
+                    side: BorderSide(color: ColorsLibrary.appGray),
                   ),
                 ),
               ),
               onPressed: () => {
                 addNumber('8'),
               },
-              child: const Text(
+              child: Text(
                 '8',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: ColorsLibrary.appGray,
                   fontSize: 30,
                 ),
               ),
@@ -198,17 +199,17 @@ class KeyboardWidget extends StatelessWidget {
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
-                    side: const BorderSide(color: Colors.grey),
+                    side: BorderSide(color: ColorsLibrary.appGray),
                   ),
                 ),
               ),
               onPressed: () => {
                 addNumber('9'),
               },
-              child: const Text(
+              child: Text(
                 '9',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: ColorsLibrary.appGray,
                   fontSize: 30,
                 ),
               ),
@@ -223,10 +224,10 @@ class KeyboardWidget extends StatelessWidget {
               onPressed: () => {
                 addNumber('.'),
               },
-              child: const Text(
+              child: Text(
                 '.',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: ColorsLibrary.appGray,
                   fontSize: 30,
                 ),
               ),
@@ -236,17 +237,17 @@ class KeyboardWidget extends StatelessWidget {
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
-                    side: const BorderSide(color: Colors.grey),
+                    side: BorderSide(color: ColorsLibrary.appGray),
                   ),
                 ),
               ),
               onPressed: () => {
                 addNumber('0'),
               },
-              child: const Text(
+              child: Text(
                 '0',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: ColorsLibrary.appGray,
                   fontSize: 30,
                 ),
               ),
@@ -255,9 +256,9 @@ class KeyboardWidget extends StatelessWidget {
               onPressed: () => {
                 clearPrice(),
               },
-              child: const Icon(
+              child: Icon(
                 Icons.backspace,
-                color: Colors.grey,
+                color: ColorsLibrary.appGray,
               ),
             ),
           ],
@@ -272,7 +273,7 @@ class KeyboardWidget extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => {navigateToSplitPage()},
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
+                  primary: ColorsLibrary.appGreen,
                 ),
                 child: const Text(
                   "SPLIT",
