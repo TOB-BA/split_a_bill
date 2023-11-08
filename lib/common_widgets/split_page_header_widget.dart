@@ -16,15 +16,16 @@ class SplitPageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        Container(
           height: 100,
           width: double.infinity,
+          color: Colors.white,
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: ColorsLibrary.appGray,
               borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-                bottomRight: Radius.circular(10),
+                bottomLeft: Radius.circular(40),
+                bottomRight: Radius.circular(40),
               ),
             ),
             child: Row(

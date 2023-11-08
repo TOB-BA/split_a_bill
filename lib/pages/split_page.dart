@@ -93,31 +93,49 @@ class _SplitPageState extends State<SplitPage> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        color: Colors.white,
+        color: ColorsLibrary.appGray,
         child: SafeArea(
           child: Column(
             children: [
               SplitPageHeader(
                   users: users, totalBill: totalBill, leftToPay: leftToPay),
               Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: users.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    User user = users[index];
-                    return CustomCard(
-                      user: user,
-                      onDragEnd: onDragEnd,
-                    );
-                  },
+                child: SizedBox(
+                  height: 400,
+                  width: double.infinity,
+                  child: DecoratedBox(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(40),
+                        bottomRight: Radius.circular(40),
+                      ),
+                    ),
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: users.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        User user = users[index];
+                        return CustomCard(
+                          user: user,
+                          onDragEnd: onDragEnd,
+                        );
+                      },
+                    ),
+                  ),
                 ),
               ),
-              /*         ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Go back!'),
-              ),*/
+              const SizedBox(height: 10),
+              Container(
+                color: ColorsLibrary.appGray,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Go back!'),
+                ),
+              ),
+              const SizedBox(height: 10),
             ],
           ),
         ),
