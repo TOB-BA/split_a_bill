@@ -116,7 +116,7 @@ class _SplitPageState extends State<SplitPage> {
                           left: 0, top: 0, right: 0, bottom: 40),
                       child: ListView.builder(
                         padding: const EdgeInsets.all(8),
-                        itemCount: users.length,
+                        itemCount: users?.length,
                         itemBuilder: (BuildContext context, int index) {
                           User user = users[index];
                           return CustomCard(
@@ -129,14 +129,34 @@ class _SplitPageState extends State<SplitPage> {
                   ),
                 ),
               ),
-              Container(
-                color: ColorsLibrary.appGray,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Go back!'),
-                ),
+              const SizedBox(height: 10),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.white.withOpacity(0.2),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.white.withOpacity(0.4),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.white.withOpacity(0.6),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.white.withOpacity(0.8),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Generate QR code'),
+                  ),
+                ],
               ),
               const SizedBox(height: 10),
             ],

@@ -28,7 +28,7 @@ class Alert extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: ColorsLibrary.appGreen,
+                  backgroundColor: ColorsLibrary.appGreen,
                 ),
                 child: const Text(
                   'OK',

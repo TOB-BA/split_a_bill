@@ -34,6 +34,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  bool getLastCharacterInString(String text) {
+    return text.contains(".");
+  }
+
   void addNumber(String number) {
     setState(() {
       if (price == CommonConstants.initialPrice) {
@@ -42,6 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
           return;
         }
         price = "";
+      } else if (getLastCharacterInString(price) && number == ".") {
+        return;
       }
 
       price = price + number;

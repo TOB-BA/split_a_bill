@@ -273,7 +273,7 @@ class KeyboardWidget extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => {navigateToSplitPage()},
                 style: ElevatedButton.styleFrom(
-                  primary: ColorsLibrary.appGreen,
+                  backgroundColor: ColorsLibrary.appGreen,
                 ),
                 child: const Text(
                   "SPLIT",
