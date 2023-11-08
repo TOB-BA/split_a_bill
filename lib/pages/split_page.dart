@@ -83,7 +83,13 @@ class _SplitPageState extends State<SplitPage> {
       appBar: AppBar(
         backgroundColor: ColorsLibrary.appGray,
         centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.white, size: 40),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_rounded),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        iconTheme: const IconThemeData(color: Colors.white, size: 30),
         title: const Text(
           "Split the bill",
           textAlign: TextAlign.center,
