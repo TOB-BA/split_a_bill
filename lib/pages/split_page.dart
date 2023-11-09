@@ -6,6 +6,8 @@ import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:first_flutter_project/models/user.dart';
 import 'package:flutter/material.dart';
 
+import 'qr_codes_page.dart';
+
 class SplitPage extends StatefulWidget {
   const SplitPage(this.numberOfPersons, this.price, {super.key});
 
@@ -43,6 +45,14 @@ class _SplitPageState extends State<SplitPage> {
 
   User findUserById(int id) {
     return users.firstWhere((user) => user.id == id);
+  }
+
+  void navigateToScanQrCodePage(List<User> listOfUsers) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => QrCodesPage(listOfUsers),
+      ),
+    );
   }
 
   void calculateLeftToPay(List<User> users) {
@@ -157,9 +167,7 @@ class _SplitPageState extends State<SplitPage> {
                     color: Colors.white.withOpacity(0.8),
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                    onPressed: () => {navigateToScanQrCodePage(users)},
                     child: const Text('Generate QR code'),
                   ),
                 ],
