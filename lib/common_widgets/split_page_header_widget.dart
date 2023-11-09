@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class SplitPageHeader extends StatelessWidget {
   final List<User> users;
-  final String totalBill;
+  final double totalBill;
   final double leftToPay;
 
   const SplitPageHeader(
@@ -28,12 +28,11 @@ class SplitPageHeader extends StatelessWidget {
                 bottomRight: Radius.circular(40),
               ),
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     const Text(
                       "Total bill",
@@ -42,60 +41,50 @@ class SplitPageHeader extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    Text(
-                      "€ $totalBill",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                    const Text(
+                      "Left to pay",
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "€ ${totalBill.toStringAsFixed(2)}",
+                        softWrap: false,
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        "€ ${leftToPay.toStringAsFixed(2)}",
+                        softWrap: false,
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: leftToPay > 0
+                              ? ColorsLibrary.appRed
+                              : ColorsLibrary.appGreen,
+                        ),
                       ),
                     ),
                   ],
                 ),
-                leftBill(leftToPay),
               ],
             ),
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget leftBill(leftToPay1) {
-    if (leftToPay1 > 0) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            "Left to pay",
-            style: TextStyle(fontSize: 20, color: Colors.white),
-          ),
-          Text(
-            "€ $leftToPay1",
-            style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: ColorsLibrary.appRed),
-          ),
-        ],
-      );
-    }
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          "Left to pay",
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-          ),
-        ),
-        Text(
-          "€ $leftToPay1",
-          style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: ColorsLibrary.appGreen),
         ),
       ],
     );

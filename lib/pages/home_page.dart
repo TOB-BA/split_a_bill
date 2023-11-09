@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SplitPage(personsNumber, price),
+        builder: (context) => SplitPage(personsNumber, double.parse(price)),
       ),
     );
   }

@@ -5,7 +5,6 @@ class User {
   String name;
   double priceToPay;
   double sliderValue;
-  double maxSliderValue;
   Color color;
   bool isNameInEditMode;
 
@@ -14,7 +13,6 @@ class User {
       required this.name,
       required this.priceToPay,
       required this.sliderValue,
-      required this.maxSliderValue,
       required this.color,
       required this.isNameInEditMode});
 }

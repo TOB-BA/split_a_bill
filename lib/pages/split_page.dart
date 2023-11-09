@@ -12,7 +12,7 @@ class SplitPage extends StatefulWidget {
   const SplitPage(this.numberOfPersons, this.price, {super.key});
 
   final int numberOfPersons;
-  final String price;
+  final double price;
 
   @override
   State<SplitPage> createState() => _SplitPageState();
@@ -20,7 +20,7 @@ class SplitPage extends StatefulWidget {
 
 class _SplitPageState extends State<SplitPage> {
   List<User> users = [];
-  String totalBill = "";
+  double totalBill = 0.0;
   int touchedIndex = -1;
   double leftToPay = 0.0;
 
@@ -28,14 +28,13 @@ class _SplitPageState extends State<SplitPage> {
   void initState() {
     super.initState();
     totalBill = widget.price;
-    leftToPay = double.parse(widget.price);
+    leftToPay = widget.price;
     for (int i = 0; i < widget.numberOfPersons; i++) {
       users.add(User(
         id: i,
         name: "User ${i + 1}",
         priceToPay: 0,
         sliderValue: 0.0,
-        maxSliderValue: 100,
         color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
             .withOpacity(1.0),
         isNameInEditMode: false,
@@ -62,15 +61,13 @@ class _SplitPageState extends State<SplitPage> {
         calculatedPrice = calculatedPrice + user.priceToPay;
       }
 
-      leftToPay = double.parse(
-          (double.parse(widget.price) - calculatedPrice).toStringAsFixed(2));
+      leftToPay = widget.price - calculatedPrice;
     });
   }
 
   void onDragEnd(double sliderValue, int id) {
     setState(() {
       var userOnWhichSliderIsChanged = findUserById(id);
-      calculateLeftToPay(users);
 
       double allPercentages = 0;
       var restOfUsers = users.where((user) => user.id != id);
@@ -78,11 +75,21 @@ class _SplitPageState extends State<SplitPage> {
         allPercentages = allPercentages + user.sliderValue;
       }
 
-      if (allPercentages + sliderValue <= 100) {
+      if (allPercentages + sliderValue <= 100 && allPercentages <= 100) {
         userOnWhichSliderIsChanged.sliderValue = sliderValue;
-        double priceConvertedToDouble = double.parse(widget.price);
-        userOnWhichSliderIsChanged.priceToPay = double.parse(
-            (priceConvertedToDouble * (sliderValue / 100)).toStringAsFixed(2));
+        userOnWhichSliderIsChanged.priceToPay =
+            widget.price * (sliderValue / 100);
+
+        calculateLeftToPay(users);
+      } else if (allPercentages < 100 && allPercentages + sliderValue > 100) {
+        var newSliderValue = 100 - allPercentages;
+
+        userOnWhichSliderIsChanged.sliderValue = newSliderValue;
+        userOnWhichSliderIsChanged.priceToPay =
+            widget.price * (newSliderValue / 100);
+
+        calculateLeftToPay(users);
+        return;
       }
     });
   }
