@@ -31,17 +31,17 @@ class SplitPageHeader extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    const Text(
+                    Text(
                       "Total bill",
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
                       ),
                     ),
-                    const Text(
+                    Text(
                       "Left to pay",
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),

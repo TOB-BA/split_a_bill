@@ -1,10 +1,12 @@
 import 'dart:math' as math;
 
+import 'package:first_flutter_project/common_widgets/alert_widget.dart';
 import 'package:first_flutter_project/common_widgets/split_page_header_widget.dart';
 import 'package:first_flutter_project/common_widgets/user_card_widget.dart';
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:first_flutter_project/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import 'qr_codes_page.dart';
 
@@ -23,6 +25,7 @@ class _SplitPageState extends State<SplitPage> {
   double totalBill = 0.0;
   int touchedIndex = -1;
   double leftToPay = 0.0;
+  double fadeOpacity = 1.0;
 
   @override
   void initState() {
@@ -47,6 +50,15 @@ class _SplitPageState extends State<SplitPage> {
   }
 
   void navigateToScanQrCodePage(List<User> listOfUsers) {
+    if (leftToPay > 0) {
+      showDialog(
+          context: context,
+          builder: (context) => Alert(
+              title: 'Split whole bill',
+              description:
+                  'Still € ${leftToPay.toStringAsFixed(2)} left to split!'));
+      return;
+    }
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => QrCodesPage(listOfUsers),
@@ -62,6 +74,7 @@ class _SplitPageState extends State<SplitPage> {
       }
 
       leftToPay = widget.price - calculatedPrice;
+      fadeOpacity = leftToPay <= 0 ? 0.5 : 1;
     });
   }
 
@@ -101,7 +114,7 @@ class _SplitPageState extends State<SplitPage> {
         backgroundColor: ColorsLibrary.appGray,
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_rounded),
+          icon: const Icon(Icons.arrow_back_ios_rounded),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -111,7 +124,7 @@ class _SplitPageState extends State<SplitPage> {
           "Split the bill",
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.white),
-        ),
+        ).animate().fade(begin: 0.5),
       ),
       body: Container(
         height: double.infinity,
@@ -152,34 +165,48 @@ class _SplitPageState extends State<SplitPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.white.withOpacity(0.2),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.white.withOpacity(0.4),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.white.withOpacity(0.6),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.white.withOpacity(0.8),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => {navigateToScanQrCodePage(users)},
-                    child: const Text('Generate QR code'),
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: Colors.white.withOpacity(0.2),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: Colors.white.withOpacity(0.4),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: Colors.white.withOpacity(0.6),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: Colors.white.withOpacity(0.8),
+                          ),
+                        ],
+                      )
+                          .animate(
+                            onPlay: (controller) => controller.repeat(),
+                          )
+                          .fade(
+                              end: fadeOpacity,
+                              delay: const Duration(milliseconds: 700)),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => {navigateToScanQrCodePage(users)},
+                      child: const Text('Generate QR code'),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 10),
             ],
           ),
         ),

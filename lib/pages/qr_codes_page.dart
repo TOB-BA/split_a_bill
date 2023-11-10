@@ -20,7 +20,7 @@ class _QrCodesPageState extends State<QrCodesPage> {
         backgroundColor: ColorsLibrary.appGray,
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_rounded),
+          icon: const Icon(Icons.arrow_back_ios_rounded),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -42,13 +42,11 @@ class _QrCodesPageState extends State<QrCodesPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  child: TextField(
-                    controller: controller,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Enter your URL'),
-                  ),
+                TextField(
+                  controller: controller,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter your URL'),
                 ),
                 //This button when pressed navigates to QR code generation
                 Expanded(
@@ -62,7 +60,7 @@ class _QrCodesPageState extends State<QrCodesPage> {
                           children: [
                             Text(
                               user.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 30,
                               ),
@@ -72,13 +70,13 @@ class _QrCodesPageState extends State<QrCodesPage> {
                               backgroundColor: Colors.white,
                               data: '${user.priceToPay}',
                               version: QrVersions.auto,
-                              padding: EdgeInsets.all(34),
+                              padding: const EdgeInsets.all(34),
                             ),
                             const SizedBox(height: 30),
                           ],
                         );
                       } else {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                     },
                   ),
