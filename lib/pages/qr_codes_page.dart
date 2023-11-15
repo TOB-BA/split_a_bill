@@ -73,7 +73,7 @@ class _QrCodesPageState extends State<QrCodesPage> {
                 Expanded(
                   child: ListView.builder(
                     padding: const EdgeInsets.all(8),
-                    itemCount: widget.users?.length,
+                    itemCount: widget.users.length,
                     itemBuilder: (BuildContext context, int index) {
                       User user = widget.users[index];
                       if (user.priceToPay > 0) {
