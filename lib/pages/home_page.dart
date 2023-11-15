@@ -138,6 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ),
         ],
+        iconTheme: const IconThemeData(size: 30),
       ),
       body: Container(
         height: double.infinity,

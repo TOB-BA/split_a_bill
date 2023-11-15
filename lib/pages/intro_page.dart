@@ -78,13 +78,6 @@ class _IntroPageState extends State<IntroPage> {
           textAlign: TextAlign.center,
           style: TextStyle(color: ColorsLibrary.appGray),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        iconTheme: IconThemeData(color: ColorsLibrary.appGray, size: 30),
       ),
       body: Container(
         height: double.infinity,
