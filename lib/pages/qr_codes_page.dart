@@ -63,13 +63,6 @@ class _QrCodesPageState extends State<QrCodesPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                TextField(
-                  controller: controller,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Enter your URL'),
-                ),
-                //This button when pressed navigates to QR code generation
                 Expanded(
                   child: ListView.builder(
                     padding: const EdgeInsets.all(8),
@@ -80,7 +73,7 @@ class _QrCodesPageState extends State<QrCodesPage> {
                         return Column(
                           children: [
                             Text(
-                              user.name,
+                              "${user.name} - € ${user.priceToPay.toStringAsFixed(2)}",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 30,
