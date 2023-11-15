@@ -1,7 +1,12 @@
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
+import 'package:first_flutter_project/database/database_service.dart';
+import 'package:first_flutter_project/injection.dart';
+import 'package:first_flutter_project/models/admin.dart';
 import 'package:first_flutter_project/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+
+import '../models/qr_data.dart';
 
 class QrCodesPage extends StatefulWidget {
   const QrCodesPage(this.users, {super.key});
@@ -12,6 +17,22 @@ class QrCodesPage extends StatefulWidget {
 
 class _QrCodesPageState extends State<QrCodesPage> {
   TextEditingController controller = TextEditingController();
+
+  Future<Admin> getAdmin() async {
+    return (await getIt<DatabaseService>().getAdmin())[0];
+  }
+
+  Future<PaymentData> getQrdDta(User user) async {
+    Admin admin = await getAdmin();
+    return PaymentData(
+      userId: user.id,
+      firstName: admin.firstName,
+      lastName: admin.lastName,
+      address: admin.address,
+      cardNumber: admin.creditCardNumber,
+      priceToPay: user.priceToPay,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +87,32 @@ class _QrCodesPageState extends State<QrCodesPage> {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            QrImageView(
-                              backgroundColor: Colors.white,
-                              data: '${user.priceToPay}',
-                              version: QrVersions.auto,
-                              padding: const EdgeInsets.all(34),
+                            FutureBuilder<PaymentData>(
+                              future: getQrdDta(user),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const CircularProgressIndicator();
+                                } else if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                } else {
+                                  PaymentData? paymentData = snapshot.data;
+                                  String? firstName = paymentData?.firstName;
+                                  String? lastName = paymentData?.lastName;
+                                  String? address = paymentData?.address;
+                                  String? cardNumber =
+                                      paymentData?.cardNumber.toString();
+                                  String? priceToPay =
+                                      paymentData?.priceToPay.toString();
+                                  return QrImageView(
+                                    backgroundColor: Colors.white,
+                                    data:
+                                        '$firstName $lastName \n$address\n$cardNumber\n$priceToPay',
+                                    version: QrVersions.auto,
+                                    padding: const EdgeInsets.all(34),
+                                  );
+                                }
+                              },
                             ),
                             const SizedBox(height: 30),
                           ],

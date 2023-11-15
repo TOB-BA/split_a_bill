@@ -111,7 +111,7 @@ class _CustomCardState extends State<CustomCard> {
   Widget _editTitleTextField(user) {
     if (user.isNameInEditMode) {
       return SizedBox(
-        width: 150,
+        width: 120,
         height: 30,
         child: TextField(
           onTapOutside: (event) => {
