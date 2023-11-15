@@ -67,6 +67,39 @@ class _IntroPageState extends State<IntroPage> {
     _creditCardNumberController.text = admin.creditCardNumber.toString();
   }
 
+  mainButtonPressed() async {
+    admin = Admin(
+        id: 1,
+        firstName: _firstNameController.text,
+        lastName: _lastNameController.text,
+        email: _emailAddressController.text,
+        address: _addressController.text,
+        creditCardNumber: int.parse(_creditCardNumberController.text));
+
+    widget.title == CommonConstants.editAdminTitle
+        ? await navigateFromProfilePage(admin)
+        : await navigateToHomePage(admin);
+  }
+
+  navigateToHomePage(Admin createdAdmin) async {
+    await getIt<DatabaseService>().insertAdmin(createdAdmin);
+
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const MyHomePage(
+          title: CommonConstants.homePageTitle,
+        ),
+      ),
+    );
+  }
+
+  navigateFromProfilePage(Admin updatedAdmin) async {
+    await getIt<DatabaseService>().updateAdmin(updatedAdmin);
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -200,38 +233,5 @@ class _IntroPageState extends State<IntroPage> {
         ),
       ),
     );
-  }
-
-  mainButtonPressed() async {
-    admin = Admin(
-        id: 1,
-        firstName: _firstNameController.text,
-        lastName: _lastNameController.text,
-        email: _emailAddressController.text,
-        address: _addressController.text,
-        creditCardNumber: int.parse(_creditCardNumberController.text));
-
-    widget.title == CommonConstants.editAdminTitle
-        ? await navigateFromProfilePage(admin)
-        : await navigateToHomePage(admin);
-  }
-
-  navigateToHomePage(Admin createdAdmin) async {
-    await getIt<DatabaseService>().insertAdmin(createdAdmin);
-
-    // ignore: use_build_context_synchronously
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const MyHomePage(
-          title: CommonConstants.homePageTitle,
-        ),
-      ),
-    );
-  }
-
-  navigateFromProfilePage(Admin updatedAdmin) async {
-    await getIt<DatabaseService>().updateAdmin(updatedAdmin);
-    // ignore: use_build_context_synchronously
-    Navigator.of(context).pop();
   }
 }
