@@ -1,4 +1,5 @@
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
+import 'package:first_flutter_project/constants/common_constants.dart';
 import 'package:first_flutter_project/database/database_service.dart';
 import 'package:first_flutter_project/injection.dart';
 import 'package:first_flutter_project/models/admin.dart';
@@ -6,7 +7,10 @@ import 'package:first_flutter_project/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class IntroPage extends StatefulWidget {
-  const IntroPage({super.key});
+  final String title;
+  final String buttonTitle;
+
+  const IntroPage({super.key, required this.title, required this.buttonTitle});
 
   @override
   State<IntroPage> createState() => _IntroPageState();
@@ -24,6 +28,9 @@ class _IntroPageState extends State<IntroPage> {
   @override
   void initState() {
     super.initState();
+    if (widget.title == CommonConstants.editAdminTitle) {
+      getAdmin();
+    }
   }
 
   void setup() {
@@ -50,6 +57,16 @@ class _IntroPageState extends State<IntroPage> {
     return value == null || value.trim().isEmpty;
   }
 
+  Future<void> getAdmin() async {
+    admin = (await getIt<DatabaseService>().getAdmin())[0];
+
+    _firstNameController.text = admin.firstName;
+    _lastNameController.text = admin.lastName;
+    _emailAddressController.text = admin.email;
+    _addressController.text = admin.address;
+    _creditCardNumberController.text = admin.creditCardNumber.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +74,7 @@ class _IntroPageState extends State<IntroPage> {
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
-          "Create your account",
+          widget.title,
           textAlign: TextAlign.center,
           style: TextStyle(color: ColorsLibrary.appGray),
         ),
@@ -163,14 +180,15 @@ class _IntroPageState extends State<IntroPage> {
                       child: ElevatedButton(
                         onPressed: () => {
                           if (_formKey.currentState!.validate())
-                            {navigateToHomePage()}
+                            {mainButtonPressed()}
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: ColorsLibrary.appGreen,
                         ),
-                        child: const Text(
-                          "CREATE",
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        child: Text(
+                          widget.buttonTitle,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 16),
                         ),
                       ),
                     ),
@@ -184,7 +202,7 @@ class _IntroPageState extends State<IntroPage> {
     );
   }
 
-  navigateToHomePage() async {
+  mainButtonPressed() async {
     admin = Admin(
         id: 1,
         firstName: _firstNameController.text,
@@ -193,15 +211,27 @@ class _IntroPageState extends State<IntroPage> {
         address: _addressController.text,
         creditCardNumber: int.parse(_creditCardNumberController.text));
 
-    await getIt<DatabaseService>().insertAdmin(admin);
+    widget.title == CommonConstants.editAdminTitle
+        ? await navigateFromProfilePage(admin)
+        : await navigateToHomePage(admin);
+  }
+
+  navigateToHomePage(Admin createdAdmin) async {
+    await getIt<DatabaseService>().insertAdmin(createdAdmin);
 
     // ignore: use_build_context_synchronously
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const MyHomePage(
-          title: "We Split",
+          title: CommonConstants.homePageTitle,
         ),
       ),
     );
+  }
+
+  navigateFromProfilePage(Admin updatedAdmin) async {
+    await getIt<DatabaseService>().updateAdmin(updatedAdmin);
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pop();
   }
 }

@@ -39,4 +39,18 @@ class DatabaseService {
       );
     });
   }
+
+  Future<void> updateAdmin(Admin admin) async {
+    final database = openDatabase(
+      join(await getDatabasesPath(), 'split_bill_database.db'),
+    );
+    final db = await database;
+
+    await db.update(
+      'admin',
+      admin.toMap(),
+      where: 'id = ?',
+      whereArgs: [admin.id],
+    );
+  }
 }

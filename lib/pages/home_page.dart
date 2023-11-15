@@ -1,6 +1,7 @@
 import 'package:first_flutter_project/common_widgets/keyboard_widget.dart';
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:first_flutter_project/constants/common_constants.dart';
+import 'package:first_flutter_project/pages/intro_page.dart';
 import 'package:first_flutter_project/pages/split_page.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ import '../common_widgets/total_price_widget.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override
@@ -87,6 +89,15 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void navigateToProfilePage() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const IntroPage(
+            title: CommonConstants.editAdminTitle, buttonTitle: "EDIT"),
+      ),
+    );
+  }
+
   void navigateToSplitPage() {
     if (double.parse(price) <= 0) {
       increasePriceDialog();
@@ -116,6 +127,17 @@ class _MyHomePageState extends State<MyHomePage> {
           textAlign: TextAlign.center,
           style: TextStyle(color: ColorsLibrary.appGray),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.account_circle_rounded,
+              color: ColorsLibrary.appGray,
+            ),
+            onPressed: () {
+              navigateToProfilePage();
+            },
+          ),
+        ],
       ),
       body: Container(
         height: double.infinity,

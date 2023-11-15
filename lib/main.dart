@@ -1,4 +1,5 @@
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
+import 'package:first_flutter_project/constants/common_constants.dart';
 import 'package:first_flutter_project/database/database_service.dart';
 import 'package:first_flutter_project/injection.dart';
 import 'package:first_flutter_project/models/admin.dart';
@@ -40,9 +41,10 @@ class MyApp extends StatelessWidget {
 
   Future<Widget> navigateToFirstAppPage() async {
     if (await getAdmin() == null) {
-      return const IntroPage();
+      return const IntroPage(
+          title: CommonConstants.createAdminTitle, buttonTitle: "CREATE");
     } else {
-      return const MyHomePage(title: "We split");
+      return const MyHomePage(title: CommonConstants.homePageTitle);
     }
   }
 
