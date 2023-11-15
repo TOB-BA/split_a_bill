@@ -78,6 +78,13 @@ class _IntroPageState extends State<IntroPage> {
           textAlign: TextAlign.center,
           style: TextStyle(color: ColorsLibrary.appGray),
         ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_rounded),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        iconTheme: IconThemeData(color: ColorsLibrary.appGray, size: 30),
       ),
       body: Container(
         height: double.infinity,
@@ -105,7 +112,7 @@ class _IntroPageState extends State<IntroPage> {
                               return 'Please enter first name';
                             }
                           },
-                          cursorColor: Colors.red.shade500,
+                          cursorColor: ColorsLibrary.appGray,
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'First name',
@@ -119,7 +126,7 @@ class _IntroPageState extends State<IntroPage> {
                               return 'Please enter last name';
                             }
                           },
-                          cursorColor: Colors.red.shade500,
+                          cursorColor: ColorsLibrary.appGray,
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Last name',
@@ -133,7 +140,7 @@ class _IntroPageState extends State<IntroPage> {
                             }
                           },
                           autofocus: true,
-                          cursorColor: Colors.red.shade500,
+                          cursorColor: ColorsLibrary.appGray,
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Address',
@@ -149,7 +156,7 @@ class _IntroPageState extends State<IntroPage> {
                             }
                           },
                           autofocus: true,
-                          cursorColor: Colors.red.shade500,
+                          cursorColor: ColorsLibrary.appGray,
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Email address',
