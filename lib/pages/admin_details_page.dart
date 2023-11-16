@@ -7,17 +7,18 @@ import 'package:first_flutter_project/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class IntroPage extends StatefulWidget {
+class AdminDetailsPage extends StatefulWidget {
   final String title;
   final String buttonTitle;
 
-  const IntroPage({super.key, required this.title, required this.buttonTitle});
+  const AdminDetailsPage(
+      {super.key, required this.title, required this.buttonTitle});
 
   @override
-  State<IntroPage> createState() => _IntroPageState();
+  State<AdminDetailsPage> createState() => _AdminDetailsPageState();
 }
 
-class _IntroPageState extends State<IntroPage> {
+class _AdminDetailsPageState extends State<AdminDetailsPage> {
   late Admin admin;
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();

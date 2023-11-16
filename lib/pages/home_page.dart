@@ -1,7 +1,7 @@
 import 'package:first_flutter_project/common_widgets/keyboard_widget.dart';
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:first_flutter_project/constants/common_constants.dart';
-import 'package:first_flutter_project/pages/intro_page.dart';
+import 'package:first_flutter_project/pages/admin_details_page.dart';
 import 'package:first_flutter_project/pages/split_page.dart';
 import 'package:flutter/material.dart';
 
@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void navigateToProfilePage() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const IntroPage(
+        builder: (context) => const AdminDetailsPage(
           title: CommonConstants.editAdminTitle,
           buttonTitle: "EDIT",
         ),

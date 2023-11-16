@@ -3,8 +3,8 @@ import 'package:first_flutter_project/constants/common_constants.dart';
 import 'package:first_flutter_project/database/database_service.dart';
 import 'package:first_flutter_project/injection.dart';
 import 'package:first_flutter_project/models/admin.dart';
+import 'package:first_flutter_project/pages/admin_details_page.dart';
 import 'package:first_flutter_project/pages/home_page.dart';
-import 'package:first_flutter_project/pages/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
 
   Future<Widget> navigateToFirstAppPage() async {
     if (await getAdmin() == null) {
-      return const IntroPage(
+      return const AdminDetailsPage(
         title: CommonConstants.createAdminTitle,
         buttonTitle: "CREATE",
       );
