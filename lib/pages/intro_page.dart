@@ -65,7 +65,13 @@ class _IntroPageState extends State<IntroPage> {
     _lastNameController.text = admin.lastName;
     _emailAddressController.text = admin.email;
     _addressController.text = admin.address;
-    _creditCardNumberController.text = admin.creditCardNumber.toString();
+
+    var adminCreditCardNumberAsString = admin.creditCardNumber.toString();
+
+    _creditCardNumberController.text =
+        "${adminCreditCardNumberAsString.substring(0, 3)}-"
+        "${adminCreditCardNumberAsString.substring(3, 14)}-"
+        "${adminCreditCardNumberAsString.substring(14)}";
   }
 
   mainButtonPressed() async {
