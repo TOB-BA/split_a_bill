@@ -100,7 +100,12 @@ class _QrCodesPageState extends State<QrCodesPage> {
                                   return QrImageView(
                                     backgroundColor: Colors.white,
                                     data:
-                                        '$firstName $lastName \n$address\n$cardNumber\n$priceToPay',
+                                        '${lastName?.toUpperCase()} ${firstName?.toUpperCase()}\n'
+                                        '$cardNumber\n'
+                                        'BAM$priceToPay\n\n\n'
+                                        'mozda radi\n'
+                                        '${address?.toUpperCase()}\n'
+                                        'PALE',
                                     version: QrVersions.auto,
                                     padding: const EdgeInsets.all(34),
                                   );

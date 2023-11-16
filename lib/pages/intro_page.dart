@@ -5,6 +5,7 @@ import 'package:first_flutter_project/injection.dart';
 import 'package:first_flutter_project/models/admin.dart';
 import 'package:first_flutter_project/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class IntroPage extends StatefulWidget {
   final String title;
@@ -69,12 +70,14 @@ class _IntroPageState extends State<IntroPage> {
 
   mainButtonPressed() async {
     admin = Admin(
-        id: 1,
-        firstName: _firstNameController.text,
-        lastName: _lastNameController.text,
-        email: _emailAddressController.text,
-        address: _addressController.text,
-        creditCardNumber: int.parse(_creditCardNumberController.text));
+      id: 1,
+      firstName: _firstNameController.text,
+      lastName: _lastNameController.text,
+      email: _emailAddressController.text,
+      address: _addressController.text,
+      creditCardNumber:
+          int.parse(_creditCardNumberController.text.replaceAll("-", "")),
+    );
 
     widget.title == CommonConstants.editAdminTitle
         ? await navigateFromProfilePage(admin)
@@ -123,111 +126,112 @@ class _IntroPageState extends State<IntroPage> {
               child: Form(
                 key: _formKey,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        TextFormField(
-                          controller: _firstNameController,
-                          autofocus: true,
-                          validator: (value) {
-                            if (checkIfValueIsNullOrEmpty(value)) {
-                              return 'Please enter first name';
-                            }
-                          },
-                          cursorColor: ColorsLibrary.appGray,
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'First name',
-                          ),
-                        ),
-                        TextFormField(
-                          controller: _lastNameController,
-                          autofocus: true,
-                          validator: (value) {
-                            if (checkIfValueIsNullOrEmpty(value)) {
-                              return 'Please enter last name';
-                            }
-                          },
-                          cursorColor: ColorsLibrary.appGray,
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'Last name',
-                          ),
-                        ),
-                        TextFormField(
-                          controller: _addressController,
-                          validator: (value) {
-                            if (checkIfValueIsNullOrEmpty(value)) {
-                              return 'Please enter address';
-                            }
-                          },
-                          autofocus: true,
-                          cursorColor: ColorsLibrary.appGray,
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'Address',
-                          ),
-                        ),
-                        TextFormField(
-                          controller: _emailAddressController,
-                          validator: (value) {
-                            if (checkIfValueIsNullOrEmpty(value)) {
-                              return 'Please enter email address';
-                            } else if (!checkIfEmailIsInValidForm(value)) {
-                              return 'Email is not in valid form';
-                            }
-                          },
-                          autofocus: true,
-                          cursorColor: ColorsLibrary.appGray,
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'Email address',
-                          ),
-                        ),
-                        TextFormField(
-                          controller: _creditCardNumberController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter card number';
-                            }
-                            if (value.length != 16) {
-                              return 'Card number must contain 16 numbers';
-                            }
-                          },
-                          autofocus: true,
-                          cursorColor: ColorsLibrary.appGray,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'Credit card number',
-                          ),
-                        ),
-                      ],
+                    TextFormField(
+                      controller: _firstNameController,
+                      autofocus: true,
+                      validator: (value) {
+                        if (checkIfValueIsNullOrEmpty(value)) {
+                          return 'Please enter first name';
+                        }
+                      },
+                      cursorColor: ColorsLibrary.appGray,
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'First name',
+                      ),
                     ),
-                    SizedBox(
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: () => {
-                          if (_formKey.currentState!.validate())
-                            {mainButtonPressed()}
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorsLibrary.appGreen,
-                        ),
-                        child: Text(
-                          widget.buttonTitle,
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 16),
-                        ),
+                    TextFormField(
+                      controller: _lastNameController,
+                      autofocus: true,
+                      validator: (value) {
+                        if (checkIfValueIsNullOrEmpty(value)) {
+                          return 'Please enter last name';
+                        }
+                      },
+                      cursorColor: ColorsLibrary.appGray,
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Last name',
+                      ),
+                    ),
+                    TextFormField(
+                      controller: _addressController,
+                      validator: (value) {
+                        if (checkIfValueIsNullOrEmpty(value)) {
+                          return 'Please enter address';
+                        }
+                      },
+                      autofocus: true,
+                      cursorColor: ColorsLibrary.appGray,
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Address',
+                      ),
+                    ),
+                    TextFormField(
+                      controller: _emailAddressController,
+                      validator: (value) {
+                        if (checkIfValueIsNullOrEmpty(value)) {
+                          return 'Please enter email address';
+                        } else if (!checkIfEmailIsInValidForm(value)) {
+                          return 'Email is not in valid form';
+                        }
+                      },
+                      autofocus: true,
+                      cursorColor: ColorsLibrary.appGray,
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Email address',
+                      ),
+                    ),
+                    TextFormField(
+                      controller: _creditCardNumberController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter card number';
+                        }
+                        if (value.length != 18) {
+                          return 'Card number must contain 16 numbers';
+                        }
+                      },
+                      inputFormatters: [
+                        MaskTextInputFormatter(
+                          mask: "###-###########-##",
+                          filter: {"#": RegExp(r'[0-9]')},
+                        )
+                      ],
+                      autofocus: true,
+                      cursorColor: ColorsLibrary.appGray,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Credit card number',
                       ),
                     ),
                   ],
                 ),
               ),
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+        child: SizedBox(
+          height: 50,
+          child: ElevatedButton(
+            onPressed: () => {
+              if (_formKey.currentState!.validate()) {mainButtonPressed()}
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorsLibrary.appGreen,
+            ),
+            child: Text(
+              widget.buttonTitle,
+              style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
           ),
         ),
