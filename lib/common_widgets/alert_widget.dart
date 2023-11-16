@@ -34,7 +34,7 @@ class Alert extends StatelessWidget {
                   'OK',
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
-              )
+              ),
             ],
           ),
         ),

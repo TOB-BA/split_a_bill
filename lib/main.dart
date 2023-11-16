@@ -42,9 +42,13 @@ class MyApp extends StatelessWidget {
   Future<Widget> navigateToFirstAppPage() async {
     if (await getAdmin() == null) {
       return const IntroPage(
-          title: CommonConstants.createAdminTitle, buttonTitle: "CREATE");
+        title: CommonConstants.createAdminTitle,
+        buttonTitle: "CREATE",
+      );
     } else {
-      return const MyHomePage(title: CommonConstants.homePageTitle);
+      return const MyHomePage(
+        title: CommonConstants.homePageTitle,
+      );
     }
   }
 

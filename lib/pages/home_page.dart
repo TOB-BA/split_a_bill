@@ -37,18 +37,19 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   bool getLastCharacterInString(String text) {
-    return text.contains(".");
+    return text.contains(CommonConstants.dot);
   }
 
   void addNumber(String number) {
     setState(() {
       if (price == CommonConstants.initialPrice) {
-        if (number == ".") {
+        if (number == CommonConstants.dot) {
           price = CommonConstants.initialPriceWithDot;
           return;
         }
-        price = "";
-      } else if (getLastCharacterInString(price) && number == ".") {
+        price = CommonConstants.emptyString;
+      } else if (getLastCharacterInString(price) &&
+          number == CommonConstants.dot) {
         return;
       }
 
@@ -61,31 +62,36 @@ class _MyHomePageState extends State<MyHomePage> {
       if (price.length > 1) {
         price = price.substring(0, price.length - 1);
       } else {
-        price = '0';
+        price = CommonConstants.initialPrice;
       }
     });
   }
 
   void increasePersonsNumberDialog() {
     showDialog(
-        context: context,
-        builder: (context) => Alert(
-            title: 'Increase number of persons',
-            description: 'You can\'t split the bill with $personsNumber(s)!'));
+      context: context,
+      builder: (context) => Alert(
+        title: 'Increase number of persons',
+        description:
+            'You can\'t split the bill with $personsNumber persons(s)!',
+      ),
+    );
   }
 
   void increasePriceDialog() {
-    var bill = "";
-    if (price == "0.") {
+    var bill = CommonConstants.emptyString;
+    if (price == CommonConstants.initialPriceWithDot) {
       bill = CommonConstants.initialPrice;
     } else {
       bill = price;
     }
+
     showDialog(
       context: context,
       builder: (context) => Alert(
-          title: 'Increase price',
-          description: 'You can\'t split the bill which is € $bill!'),
+        title: 'Increase price',
+        description: 'You can\'t split the bill which is € $bill!',
+      ),
     );
   }
 
@@ -93,7 +99,9 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const IntroPage(
-            title: CommonConstants.editAdminTitle, buttonTitle: "EDIT"),
+          title: CommonConstants.editAdminTitle,
+          buttonTitle: "EDIT",
+        ),
       ),
     );
   }
@@ -111,7 +119,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SplitPage(personsNumber, double.parse(price)),
+        builder: (context) => SplitPage(
+          personsNumber,
+          double.parse(price),
+        ),
       ),
     );
   }
@@ -163,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   price: price,
                   personsNumber: personsNumber,
                 ),
-              )
+              ),
             ],
           ),
         ),

@@ -50,8 +50,8 @@ class _IntroPageState extends State<IntroPage> {
 
   bool checkIfEmailIsInValidForm(var email) {
     return RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email);
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    ).hasMatch(email);
   }
 
   bool checkIfValueIsNullOrEmpty(var value) {
@@ -81,8 +81,10 @@ class _IntroPageState extends State<IntroPage> {
       lastName: _lastNameController.text,
       email: _emailAddressController.text,
       address: _addressController.text,
-      creditCardNumber:
-          int.parse(_creditCardNumberController.text.replaceAll("-", "")),
+      creditCardNumber: int.parse(
+        _creditCardNumberController.text
+            .replaceAll("-", CommonConstants.emptyString),
+      ),
     );
 
     widget.title == CommonConstants.editAdminTitle
@@ -207,7 +209,7 @@ class _IntroPageState extends State<IntroPage> {
                         MaskTextInputFormatter(
                           mask: "###-###########-##",
                           filter: {"#": RegExp(r'[0-9]')},
-                        )
+                        ),
                       ],
                       autofocus: true,
                       cursorColor: ColorsLibrary.appGray,

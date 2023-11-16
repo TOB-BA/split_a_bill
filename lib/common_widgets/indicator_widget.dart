@@ -37,7 +37,7 @@ class Indicator extends StatelessWidget {
             fontWeight: FontWeight.normal,
             color: textColor,
           ),
-        )
+        ),
       ],
     );
   }

@@ -35,15 +35,17 @@ class _SplitPageState extends State<SplitPage> {
     totalBill = widget.price;
     leftToPay = widget.price;
     for (int i = 0; i < widget.numberOfPersons; i++) {
-      users.add(User(
-        id: i,
-        name: "User ${i + 1}",
-        priceToPay: 0,
-        sliderValue: 0.0,
-        color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-            .withOpacity(1.0),
-        isNameInEditMode: false,
-      ));
+      users.add(
+        User(
+          id: i,
+          name: "User ${i + 1}",
+          priceToPay: 0,
+          sliderValue: 0.0,
+          color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+              .withOpacity(1.0),
+          isNameInEditMode: false,
+        ),
+      );
     }
   }
 
@@ -71,6 +73,7 @@ class _SplitPageState extends State<SplitPage> {
   void calculateLeftToPay(List<User> users) {
     setState(() {
       var calculatedPrice = 0.0;
+
       for (var user in users) {
         calculatedPrice = calculatedPrice + user.priceToPay;
       }

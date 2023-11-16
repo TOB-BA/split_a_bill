@@ -18,6 +18,7 @@ class CustomCard extends StatefulWidget {
 
 class _CustomCardState extends State<CustomCard> {
   TextEditingController editingController = TextEditingController();
+
   void setEditingStateOnTrue(User user) {
     setState(() {
       editingController.text = user.name;
@@ -26,12 +27,14 @@ class _CustomCardState extends State<CustomCard> {
   }
 
   void setInputFieldState(User user) {
-    setState(() {
-      if (editingController.text.isNotEmpty) {
-        user.name = editingController.text;
-        user.isNameInEditMode = false;
-      }
-    });
+    setState(
+      () {
+        if (editingController.text.isNotEmpty) {
+          user.name = editingController.text;
+          user.isNameInEditMode = false;
+        }
+      },
+    );
   }
 
   @override
@@ -100,7 +103,7 @@ class _CustomCardState extends State<CustomCard> {
                   activeColor: widget.user.color,
                   inactiveColor: widget.user.color.withOpacity(0.24),
                 ),
-              )
+              ),
             ],
           ),
         ],
