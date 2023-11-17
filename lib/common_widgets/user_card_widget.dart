@@ -1,4 +1,5 @@
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
+import 'package:first_flutter_project/extensions/price_extensions.dart';
 import 'package:first_flutter_project/models/user.dart';
 import 'package:flutter/material.dart';
 
@@ -80,7 +81,7 @@ class _CustomCardState extends State<CustomCard> {
                 ],
               ),
               Text(
-                "€ ${widget.user.priceToPay.toStringAsFixed(2)}",
+                "${widget.user.priceToPay.addCurrencySymbolToDouble()}",
                 style: TextStyle(
                   fontSize: 20,
                   color: ColorsLibrary.appGray,

@@ -1,4 +1,5 @@
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
+import 'package:first_flutter_project/extensions/price_extensions.dart';
 import 'package:first_flutter_project/models/user.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,7 @@ class SplitPageHeader extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "€ ${totalBill.toStringAsFixed(2)}",
+                        totalBill.addCurrencySymbolToDouble(),
                         softWrap: false,
                         maxLines: 2,
                         textAlign: TextAlign.center,
@@ -66,7 +67,7 @@ class SplitPageHeader extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        "€ ${leftToPay.toStringAsFixed(2)}",
+                        leftToPay.addCurrencySymbolToDouble(),
                         softWrap: false,
                         maxLines: 2,
                         textAlign: TextAlign.center,

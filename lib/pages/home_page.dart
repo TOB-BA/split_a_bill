@@ -1,6 +1,7 @@
 import 'package:first_flutter_project/common_widgets/keyboard_widget.dart';
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:first_flutter_project/constants/common_constants.dart';
+import 'package:first_flutter_project/extensions/price_extensions.dart';
 import 'package:first_flutter_project/models/split.dart';
 import 'package:first_flutter_project/pages/admin_details_page.dart';
 import 'package:first_flutter_project/pages/split_page.dart';
@@ -73,8 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (context) => Alert(
         title: 'Increase number of persons',
-        description:
-            'You can\'t split the bill with $personsNumber persons(s)!',
+        description: 'You can\'t split the bill with $personsNumber person(s)!',
       ),
     );
   }
@@ -91,7 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (context) => Alert(
         title: 'Increase price',
-        description: 'You can\'t split the bill which is € $bill!',
+        description:
+            'You can\'t split the bill which is ${bill.addCurrencySymbolToString()}!',
       ),
     );
   }

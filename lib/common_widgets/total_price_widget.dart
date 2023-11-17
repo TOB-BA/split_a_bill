@@ -1,4 +1,5 @@
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
+import 'package:first_flutter_project/extensions/price_extensions.dart';
 import 'package:flutter/material.dart';
 
 class TotalPriceWidget extends StatelessWidget {
@@ -20,7 +21,7 @@ class TotalPriceWidget extends StatelessWidget {
               right: 15,
               bottom: 0), //apply padding to all four sides
           child: Text(
-            "€ $price",
+            price.addCurrencySymbolToString(),
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
             maxLines: 2,

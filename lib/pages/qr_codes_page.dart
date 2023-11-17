@@ -1,5 +1,6 @@
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:first_flutter_project/database/database_service.dart';
+import 'package:first_flutter_project/extensions/price_extensions.dart';
 import 'package:first_flutter_project/injection.dart';
 import 'package:first_flutter_project/models/admin.dart';
 import 'package:first_flutter_project/models/user.dart';
@@ -73,7 +74,7 @@ class _QrCodesPageState extends State<QrCodesPage> {
                         return Column(
                           children: [
                             Text(
-                              "${user.name} - € ${user.priceToPay.toStringAsFixed(2)}",
+                              "${user.name} - ${user.priceToPay.addCurrencySymbolToDouble()}",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 30,
