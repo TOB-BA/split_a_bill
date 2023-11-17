@@ -5,6 +5,7 @@ import 'package:first_flutter_project/common_widgets/split_page_header_widget.da
 import 'package:first_flutter_project/common_widgets/user_card_widget.dart';
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:first_flutter_project/constants/common_constants.dart';
+import 'package:first_flutter_project/extensions/user_extensions.dart';
 import 'package:first_flutter_project/models/user.dart';
 import 'package:first_flutter_project/pages/admin_details_page.dart';
 import 'package:flutter/material.dart';
@@ -49,10 +50,6 @@ class _SplitPageState extends State<SplitPage> {
     }
   }
 
-  User findUserById(int id) {
-    return users.firstWhere((user) => user.id == id);
-  }
-
   void navigateToScanQrCodePage(List<User> listOfUsers) {
     if (leftToPay > 0) {
       showDialog(
@@ -85,7 +82,7 @@ class _SplitPageState extends State<SplitPage> {
 
   void onDragEnd(double sliderValue, int id) {
     setState(() {
-      var userOnWhichSliderIsChanged = findUserById(id);
+      var userOnWhichSliderIsChanged = users.findUserById(id);
 
       double allPercentages = 0;
       var restOfUsers = users.where((user) => user.id != id);
