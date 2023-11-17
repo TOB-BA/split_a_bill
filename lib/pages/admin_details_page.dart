@@ -144,6 +144,8 @@ class _AdminDetailsPageState extends State<AdminDetailsPage> {
                       validator: (value) {
                         if (checkIfValueIsNullOrEmpty(value)) {
                           return 'Please enter first name';
+                        } else {
+                          return null;
                         }
                       },
                       cursorColor: ColorsLibrary.appGray,
@@ -158,6 +160,8 @@ class _AdminDetailsPageState extends State<AdminDetailsPage> {
                       validator: (value) {
                         if (checkIfValueIsNullOrEmpty(value)) {
                           return 'Please enter last name';
+                        } else {
+                          return null;
                         }
                       },
                       cursorColor: ColorsLibrary.appGray,
@@ -171,6 +175,8 @@ class _AdminDetailsPageState extends State<AdminDetailsPage> {
                       validator: (value) {
                         if (checkIfValueIsNullOrEmpty(value)) {
                           return 'Please enter address';
+                        } else {
+                          return null;
                         }
                       },
                       autofocus: true,
@@ -187,6 +193,8 @@ class _AdminDetailsPageState extends State<AdminDetailsPage> {
                           return 'Please enter email address';
                         } else if (!checkIfEmailIsInValidForm(value)) {
                           return 'Email is not in valid form';
+                        } else {
+                          return null;
                         }
                       },
                       autofocus: true,
@@ -204,6 +212,8 @@ class _AdminDetailsPageState extends State<AdminDetailsPage> {
                         }
                         if (value.length != 18) {
                           return 'Card number must contain 16 numbers';
+                        } else {
+                          return null;
                         }
                       },
                       inputFormatters: [
