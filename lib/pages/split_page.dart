@@ -1,11 +1,9 @@
-import 'dart:math' as math;
-
 import 'package:first_flutter_project/common_widgets/alert_widget.dart';
 import 'package:first_flutter_project/common_widgets/split_page_header_widget.dart';
 import 'package:first_flutter_project/common_widgets/user_card_widget.dart';
 import 'package:first_flutter_project/constants/colors/colors_library.dart';
 import 'package:first_flutter_project/constants/common_constants.dart';
-import 'package:first_flutter_project/extensions/user_extensions.dart';
+import 'package:first_flutter_project/models/split.dart';
 import 'package:first_flutter_project/models/user.dart';
 import 'package:first_flutter_project/pages/admin_details_page.dart';
 import 'package:flutter/material.dart';
@@ -14,50 +12,31 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'qr_codes_page.dart';
 
 class SplitPage extends StatefulWidget {
-  const SplitPage(this.numberOfPersons, this.price, {super.key});
+  const SplitPage(this.splitData, {super.key});
 
-  final int numberOfPersons;
-  final double price;
+  final Split splitData;
 
   @override
   State<SplitPage> createState() => _SplitPageState();
 }
 
 class _SplitPageState extends State<SplitPage> {
-  List<User> users = [];
-  double totalBill = 0.0;
   int touchedIndex = -1;
-  double leftToPay = 0.0;
   double fadeOpacity = 1.0;
 
   @override
   void initState() {
     super.initState();
-    totalBill = widget.price;
-    leftToPay = widget.price;
-    for (int i = 0; i < widget.numberOfPersons; i++) {
-      users.add(
-        User(
-          id: i,
-          name: "User ${i + 1}",
-          priceToPay: 0,
-          sliderValue: 0.0,
-          color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-              .withOpacity(1.0),
-          isNameInEditMode: false,
-        ),
-      );
-    }
   }
 
   void navigateToScanQrCodePage(List<User> listOfUsers) {
-    if (leftToPay > 0) {
+    if (widget.splitData.leftToSplit > 0) {
       showDialog(
           context: context,
           builder: (context) => Alert(
               title: 'Split whole bill',
               description:
-                  'Still € ${leftToPay.toStringAsFixed(2)} left to split!'));
+                  'Still € ${widget.splitData.leftToSplit.toStringAsFixed(2)} left to split!'));
       return;
     }
     Navigator.of(context).push(
@@ -67,45 +46,10 @@ class _SplitPageState extends State<SplitPage> {
     );
   }
 
-  void calculateLeftToPay(List<User> users) {
-    setState(() {
-      var calculatedPrice = 0.0;
-
-      for (var user in users) {
-        calculatedPrice = calculatedPrice + user.priceToPay;
-      }
-
-      leftToPay = widget.price - calculatedPrice;
-      fadeOpacity = leftToPay <= 0 ? 0.5 : 1;
-    });
-  }
-
   void onDragEnd(double sliderValue, int id) {
     setState(() {
-      var userOnWhichSliderIsChanged = users.findUserById(id);
-
-      double allPercentages = 0;
-      var restOfUsers = users.where((user) => user.id != id);
-      for (var user in restOfUsers) {
-        allPercentages = allPercentages + user.sliderValue;
-      }
-
-      if (allPercentages + sliderValue <= 100 && allPercentages <= 100) {
-        userOnWhichSliderIsChanged.sliderValue = sliderValue;
-        userOnWhichSliderIsChanged.priceToPay =
-            widget.price * (sliderValue / 100);
-
-        calculateLeftToPay(users);
-      } else if (allPercentages < 100 && allPercentages + sliderValue > 100) {
-        var newSliderValue = 100 - allPercentages;
-
-        userOnWhichSliderIsChanged.sliderValue = newSliderValue;
-        userOnWhichSliderIsChanged.priceToPay =
-            widget.price * (newSliderValue / 100);
-
-        calculateLeftToPay(users);
-        return;
-      }
+      widget.splitData.calculateLefToPay(sliderValue, id);
+      fadeOpacity = widget.splitData.leftToSplit <= 0 ? 0.5 : 1;
     });
   }
 
@@ -156,7 +100,9 @@ class _SplitPageState extends State<SplitPage> {
           child: Column(
             children: [
               SplitPageHeader(
-                  users: users, totalBill: totalBill, leftToPay: leftToPay),
+                  users: widget.splitData.users,
+                  totalBill: widget.splitData.bill,
+                  leftToPay: widget.splitData.leftToSplit),
               Expanded(
                 child: SizedBox(
                   height: 400,
@@ -174,9 +120,9 @@ class _SplitPageState extends State<SplitPage> {
                           left: 0, top: 0, right: 0, bottom: 40),
                       child: ListView.builder(
                         padding: const EdgeInsets.all(8),
-                        itemCount: users.length,
+                        itemCount: widget.splitData.users.length,
                         itemBuilder: (BuildContext context, int index) {
-                          User user = users[index];
+                          User user = widget.splitData.users[index];
                           return CustomCard(
                             user: user,
                             onDragEnd: onDragEnd,
@@ -223,7 +169,8 @@ class _SplitPageState extends State<SplitPage> {
                               delay: const Duration(milliseconds: 700)),
                     ),
                     ElevatedButton(
-                      onPressed: () => {navigateToScanQrCodePage(users)},
+                      onPressed: () =>
+                          {navigateToScanQrCodePage(widget.splitData.users)},
                       child: const Text('Generate QR code'),
                     ),
                   ],
